@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod
+spec:
+  containers:
+  - name: test-container
+    image: busybox
+    command: [ "sleep", "3600" ]   # Keep the container running
+    volumeMounts:
+    - name: host-volume
+      mountPath: /mnt/hostdir
+  volumes:
+  - name: host-volume
+    hostPath:
+      path: /data/hostpath-demo     # Path on the host
+      type: Directory
